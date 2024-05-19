@@ -13,4 +13,5 @@ add_executable(GraphProject
     src/main.cpp
     src/Graph.cpp
     src/ListGraph.cpp
+    src/ArcGraph.cpp
 )
