@@ -19,6 +19,7 @@ int main(int argc, const char * argv[]) {
     listGraph.AddEdge(5, 6);
     listGraph.AddEdge(6, 4);
     
+    std::cout<< "ListGraph"<<std::endl;
     mainBFS(listGraph, [](int vertex){ std::cout << vertex << " "; });
     std::cout << std::endl;
     

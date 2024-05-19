@@ -2,7 +2,7 @@
 
 
 
-ArcGraph::ArcGraph(const IGraph &graph)
+ArcGraph::ArcGraph(const IGraph &graph): veritcesCount(graph.VerticesCount())
 {
     for (int from = 0; from < graph.VerticesCount(); ++from)
     {
@@ -12,7 +12,6 @@ ArcGraph::ArcGraph(const IGraph &graph)
                 edgeList.push_back(std::pair<int,int>(from,to));
         }
     }
-    veritcesCount = graph.VerticesCount();
 }
 
 void ArcGraph::AddEdge(int from, int to)
