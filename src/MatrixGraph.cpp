@@ -1,7 +1,7 @@
 #include "MatrixGraph.hpp"
 
 
-MatrixGraph::MatrixGraph(const IGraph &graph)
+MatrixGraph::MatrixGraph(const IGraph &graph):adjacencyMatrix(graph.VerticesCount(), std::vector<int>(graph.VerticesCount(), 0))
 {
     for (int from = 0; from < graph.VerticesCount(); ++from)
     {
@@ -11,6 +11,7 @@ MatrixGraph::MatrixGraph(const IGraph &graph)
                 adjacencyMatrix[from][to]+=1;
         }
     }
+
 }
 
 void MatrixGraph::AddEdge(int from, int to)
@@ -27,22 +28,26 @@ int MatrixGraph::VerticesCount() const
     
 std::vector<int> MatrixGraph::GetNextVertices(int vertex) const
 {
-    assert(0 <= vertex && vertex < adjacencyLists.size());
-    return adjacencyLists[vertex];
+    assert(0 <= vertex && vertex < adjacencyMatrix.size());
+    std::vector<int> nextVerices;
+    for (int to = 0; to < adjacencyMatrix[vertex].size();to++){
+        if (adjacencyMatrix[vertex][to] > 0){
+            for (int i = 0; i < adjacencyMatrix[vertex][to]; i++)
+                nextVerices.push_back(to);// тк у нас могут быть кратные ребра
+        }
+    }
+    return nextVerices;
 }
 
 std::vector<int> MatrixGraph::GetPrevVertices(int vertex) const
 { 
-    assert(0 <= vertex && vertex < adjacencyLists.size());
-    std::vector<int> prevVertices;
-    
-    for (int from = 0; from < adjacencyLists.size(); ++from)
-    {
-        for (int to: adjacencyLists[from])
-        {
-            if (to == vertex)
-                prevVertices.push_back(from);
+   assert(0 <= vertex && vertex < adjacencyMatrix.size());
+    std::vector<int> nextVerices;
+    for (int from = 0; from < adjacencyMatrix[vertex].size();from++){
+        if (adjacencyMatrix[from][vertex] > 0){
+            for (int i = 0; i < adjacencyMatrix[from][vertex]; i++)
+                nextVerices.push_back(from);// тк у нас могут быть кратные ребра
         }
     }
-    return prevVertices;
+    return nextVerices;
 }

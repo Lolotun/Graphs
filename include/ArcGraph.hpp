@@ -1,15 +1,17 @@
 #pragma once
-#include <Graph.hpp>
-struct ListGraph: public IGraph
+#include "Graph.hpp"
+#include <utility>
+
+struct ArcGraph: public IGraph
 {
 public:
-    ListGraph(int size)
-    : adjacencyLists(size)
+    ArcGraph(int size)
+    : veritcesCount(size)
     {
     }
-    
-    ListGraph(const IGraph &graph);
-    ~ListGraph()
+
+    ArcGraph(const IGraph &graph);
+    ~ArcGraph()
     {
     }
     
@@ -18,5 +20,6 @@ public:
     std::vector<int> GetNextVertices(int vertex) const override;
     std::vector<int> GetPrevVertices(int vertex) const override;
 private:
-    std::vector<std::vector<int>> adjacencyLists;
+    std::vector<std::pair<int,int>>  edgeList;
+    int veritcesCount;
 };

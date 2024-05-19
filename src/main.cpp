@@ -1,10 +1,10 @@
 #include "ListGraph.hpp"
 #include "ArcGraph.hpp"
-
+#include "MatrixGraph.hpp"
 
 
 int main(int argc, const char * argv[]) {
-    ListGraph listGraph(9);
+    ListGraph listGraph(11);
     listGraph.AddEdge(0, 1);
     listGraph.AddEdge(0, 5);
     listGraph.AddEdge(1, 2);
@@ -46,6 +46,25 @@ int main(int argc, const char * argv[]) {
         std::cout << vertex << " ";
     }
     std::cout << std::endl;    
+
+    std::cout<< "MatrixGraph"<<std::endl;
+
+    MatrixGraph matrixGraph(arcGraph);
+    mainBFS(matrixGraph, [](int vertex){ std::cout << vertex << " "; });
+    std::cout << std::endl;
+
+    mainDFS(matrixGraph, [](int vertex){ std::cout << vertex << " "; });
+    std::cout << std::endl;
+    matrixGraph.AddEdge(4,9);
+    matrixGraph.AddEdge(9,10);
+    matrixGraph.AddEdge(8,10);
+    for (int vertex: topologicalSort(matrixGraph))
+    {
+        std::cout << vertex << " ";
+    }
+    std::cout << std::endl;    
+
+
     // Нужно продемонстрировать работу конструктора копирования, проинициализировав
     // графы разных классов друг от друга. Далее, показать, что вершины и ребра
     // успешно скопированы: число вершин осталось прежним, произвести BFS и DFS.
