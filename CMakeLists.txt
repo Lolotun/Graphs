@@ -15,4 +15,5 @@ add_executable(GraphProject
     src/ListGraph.cpp
     src/ArcGraph.cpp
     src/MatrixGraph.cpp
+    src/SetGraph.cpp
 )
